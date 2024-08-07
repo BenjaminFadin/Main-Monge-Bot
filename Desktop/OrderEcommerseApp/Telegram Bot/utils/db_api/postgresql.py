@@ -72,11 +72,11 @@ class Database:
             is_courier,
             fetchrow=True
         )
-
+    
     async def select_all_users(self):
         sql = "SELECT * FROM users_user"
         return await self.execute(sql, fetch=True)
-    
+
     async def select_user(self, **kwargs):
         sql = "SELECT * FROM Users_user WHERE "
         sql, parameters = self.format_args(sql, parameters=kwargs)
@@ -107,3 +107,14 @@ class Database:
 
     async def drop_users(self):
         await self.execute("DROP TABLE users_user", execute=True)
+
+    async def clean_cart(self, user_id):
+        query = f"""
+        DELETE FROM delivery_cartitem WHERE cart_id IN 
+        (SELECT id FROM delivery_cart WHERE user_id={user_id})
+        """
+        await self.execute(query, execute=True)
+
+    async def remove_cart_item(self, item_id):
+        query = f"""DELETE FROM delivery_cartitem WHERE id={item_id}"""
+        await self.execute(query, execute=True)

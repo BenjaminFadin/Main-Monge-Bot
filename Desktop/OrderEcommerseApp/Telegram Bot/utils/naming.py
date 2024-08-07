@@ -78,10 +78,10 @@ ORDER = {
     'en': "🛍 Order"
 }
 
-SALE = {
-    "uz": "🎉 Aksiya",
-    'ru': '🎉 Акция',
-    'en': '🎉 Sale'
+CART = {
+    "uz": "🛒 Savat",
+    'ru': '🛒 Корзина',
+    'en': '🛒 Cart'
 }
 
 COMMENT = {

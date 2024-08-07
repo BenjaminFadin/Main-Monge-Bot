@@ -31,8 +31,43 @@ async def main():
 
     
     # Select a row from the table.
+
+    # SELECT
+    #     cart.id AS cart_id,
+    #     cart.created_at,
+    #     cart.user_id,
+    #     cartitem.id AS cartitem_id,
+    #     cartitem.product_id,
+    #     cartitem.quantity
+    # FROM
+    #     cart
+    # INNER JOIN
+    #     cartitem ON cart.id = cartitem.cart_id
+    # INNER JOIN
+    #     users_user ON cart.user_id = users_user.id
+    # WHERE
+    #     users_user.telegram_id = '222'
+
     row = await conn.fetch(
-        'SELECT * FROM users_user WHERE telegram_id = $1', 995991268)
+        """
+            SELECT
+        cart.id AS cart_id,
+        cart.created_at,
+        cart.user_id,
+        cartitem.id AS cartitem_id,
+        cartitem.product_id,
+        cartitem.quantity
+        FROM
+            cart
+        INNER JOIN
+            cartitem ON cart.id = cartitem.cart_id
+        INNER JOIN
+            users_user ON cart.user_id = users_user.id
+        WHERE
+            users_user.telegram_id = $1
+    """,
+    995991268)
+
     rows_dicts = [dict(row) for row in row]
     print(rows_dicts)
 

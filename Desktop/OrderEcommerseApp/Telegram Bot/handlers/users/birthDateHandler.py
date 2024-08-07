@@ -15,11 +15,12 @@ async def birthDateHandler(message: types.Message, state: FSMContext):
     birth_date_str = message.text
     state_data = await state.get_data()
     user_lang = state_data['language']
+    user_id = state_data['telegram_id']
 
     if validate_date(birth_date_str):
         birth_date = datetime.strptime(birth_date_str, '%d.%m.%Y').date()
         await db.add_user(
-            telegram_id=state_data['telegram_id'],
+            telegram_id=user_id,
             username=state_data['username'],
             first_name=state_data['first_name'],
             last_name=state_data['last_name'],
@@ -29,7 +30,7 @@ async def birthDateHandler(message: types.Message, state: FSMContext):
             is_courier=False
         )
 
-        await message.answer(naming.main_menu_response[user_lang], reply_markup=get_main_menu_keyboard(user_lang))
+        await message.answer(naming.main_menu_response[user_lang], reply_markup=get_main_menu_keyboard(user_lang, user_id))
         await PersonalData.main_menu.set()
     else:
         await message.answer(naming.BIRTH_DATE_MSG[user_lang])

@@ -26,8 +26,8 @@ async def bot_start(message: types.Message):
 
     else:
         user_lang = user['language']
-
-        await message.answer(naming.main_menu_response[user_lang], reply_markup=get_main_menu_keyboard(user_lang))
+        user_id = user['telegram_id']
+        await message.answer(naming.main_menu_response[user_lang], reply_markup=get_main_menu_keyboard(user_lang, user_id))
         await PersonalData.main_menu.set()
 
 

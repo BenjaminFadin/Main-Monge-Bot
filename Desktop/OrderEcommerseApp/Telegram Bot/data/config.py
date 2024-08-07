@@ -13,5 +13,7 @@ DB_PASS = env.str("DB_PASS")
 DB_NAME = env.str("DB_NAME")
 DB_HOST = env.str("DB_HOST")
 DB_PORT = env.str("DB_PORT")
+API_URL = env.str('API_URL')
 WEB_APP_URL = env.str("WEB_APP_URL")
-# DATABASE_URL = "postgresql://{}:{}@localhost:5432/{}'.format('postgres', '5432', 'test'"
+
+

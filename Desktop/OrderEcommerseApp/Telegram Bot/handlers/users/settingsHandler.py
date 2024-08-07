@@ -21,7 +21,7 @@ async def settingsHandler(message: types.Message):
         await message.answer(naming.BIRTH_DATE_MSG[user_lang], reply_markup=remove_kb)
         await PersonalData.change_birth_date.set()
     elif msg == naming.CANCEL[user_lang]:
-        await message.answer(naming.main_menu_response[user_lang], reply_markup=get_main_menu_keyboard(user_lang))
+        await message.answer(naming.main_menu_response[user_lang], reply_markup=get_main_menu_keyboard(user_lang, message.from_user.id))
         await PersonalData.main_menu.set()
     else:
         await message.answer(naming.error_msg[user_lang])

@@ -8,8 +8,10 @@ class PersonalData(StatesGroup):
     birthDate = State()
     main_menu = State()
     settings = State()
+    # Settings states
     change_language = State()
     change_birth_date = State()
     change_phone_number = State()
-
-
+    cart = State()
+    # Cart states
+    
